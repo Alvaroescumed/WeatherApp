@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Image, Text, View, ActivityIndicator, FlatList, TouchableOpacity, StyleSheet } from "react-native"
+import { Image, Text, View, FlatList, TouchableOpacity, StyleSheet } from "react-native"
 import { useNavigation } from '@react-navigation/native'
 import { openWeatherKey } from '../config'
-
+import Icon from 'react-native-vector-icons/AntDesign'
 
 export default function SpecificWeather({ route }) {
 
@@ -18,13 +18,13 @@ export default function SpecificWeather({ route }) {
     useEffect(() => {
         async function fetchWeatherData() {
             try {
-                const weatherRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${openWeatherKey}&units=metric&lang=es`);
-                const weatherData = await weatherRes.json();
-                setWeather(weatherData);
+                const weatherRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${openWeatherKey}&units=metric&lang=es`)
+                const weatherData = await weatherRes.json()
+                setWeather(weatherData)
 
-                const forecastRes = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${openWeatherKey}&units=metric&lang=es`);
-                const forecastData = await forecastRes.json();
-                setForecast(forecastData.list.filter((item, index) => index < 8)); //con esto limitamos solo las proximas 24 horas
+                const forecastRes = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${openWeatherKey}&units=metric&lang=es`)
+                const forecastData = await forecastRes.json()
+                setForecast(forecastData.list.filter((item, index) => index < 8))//con esto limitamos solo las proximas 24 horas
                 
                 // DEJO ESTO COMENTADO YA QUE CON EL PLAN FREE NO ME DEJA ACCEDER A ESTAS FUNCIONES
 
@@ -35,27 +35,27 @@ export default function SpecificWeather({ route }) {
 
         
             } catch (err) {
-                console.error('Error fetching data', err);
-                setError(err.message);
+                console.error('Error fetching data', err)
+                setError(err.message)
             
             }
-        };
+        }
 
-        fetchWeatherData();
+        fetchWeatherData()
 
-    }, [lat, long]);
+    }, [lat, long])
 
     if (error) {
-        return <Text style={styles.error}>Error: {error}</Text>;
+        return <Text style={styles.error}>Error: {error}</Text>
     }
 
     if (!weather) {
-        return <Text>No weather data available</Text>;
+        return <Text>No weather data available</Text>
     }
 
     function goToLocation () {
-        navigation.navigate('Info', { lat: weather.coord.lat, long: weather.coord.lon, nombre: weather.name });
-    };
+        navigation.navigate('Info', { lat: weather.coord.lat, long: weather.coord.lon, nombre: weather.name })
+    }
 
     return (
 
@@ -118,8 +118,8 @@ export default function SpecificWeather({ route }) {
             /> */}
     </View>
 
-    );
-};
+    )
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -183,22 +183,18 @@ const styles = StyleSheet.create({
     dailyForecastList: {
         width: '100%',
     },
-    dailyForecastItem: {
-        alignItems: 'center',
-        marginHorizontal: 10,
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-    },
-    dailyForecastIcon: {
-        width: 50,
-        height: 50,
-    },
+    // dailyForecastItem: {
+    //     alignItems: 'center',
+    //     marginHorizontal: 10,
+    //     shadowOffset: { width: 0, height: 2 },
+    //     shadowOpacity: 0.1,
+    // },
+    // dailyForecastIcon: {
+    //     width: 50,
+    //     height: 50,
+    // },
     error: {
         color: 'red',
         fontSize: 18,
     },
-    weathercontainer: {
-        display: 'flex',
-        flexDirection: 'row',
-    }
-});
+})

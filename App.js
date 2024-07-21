@@ -1,5 +1,4 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import HomeScreen from './components/HomeScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -17,7 +16,7 @@ export default function App() {
           options={{title: 'Lista'}}
         />
         <Stack.Screen 
-          name="Weather" 
+          name="Weather"  
           component={SpecificWeather} 
         />
         <Stack.Screen
@@ -26,15 +25,7 @@ export default function App() {
         />
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 

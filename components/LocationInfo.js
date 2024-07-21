@@ -13,8 +13,8 @@ export default function LocationInfo({ route }) {
         // Buscamos el municipio con el nombre tarido por parametros
         const foundMunicipio = localidades.find(municipio =>
             municipio.Población === nombre
-        );
-        setMunicipio(foundMunicipio);
+        )
+        setMunicipio(foundMunicipio)
 
         console.log(municipio)
 
@@ -52,7 +52,7 @@ export default function LocationInfo({ route }) {
             ) : (<Text>ERROR: Municipio no encontrado</Text>)}    
             
         </View>
-    );
+    )
 }
 
 const styles = StyleSheet.create({
@@ -79,4 +79,4 @@ const styles = StyleSheet.create({
         fontSize: '23px'
     }
 
-});
+})
